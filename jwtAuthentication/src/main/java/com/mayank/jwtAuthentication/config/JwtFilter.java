@@ -28,7 +28,7 @@ public class JwtFilter extends OncePerRequestFilter {
     private final ErrorResponseService errorResponseService;
 
     private static final List<String> EXCLUDED_PATHS = List.of(
-            "/v1/auth/login", "/v1/auth/register"  // add paths you want to exclude
+            "/v1/auth/login", "/v1/auth/register" ,"/v1/auth/verifyOtp" // add paths you want to exclude
     );
 
     public JwtFilter(JwtService jwtService, UserDetailsService userDetailsService, ErrorResponseService errorResponseService) {
