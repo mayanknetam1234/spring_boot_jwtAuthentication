@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.validator.constraints.UniqueElements;
 
+import java.time.LocalDateTime;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,5 +23,8 @@ public class User {
     private String password;
     @Column(nullable = false,unique = true)
     private String email;
+    private String verificationCode;
+    private LocalDateTime verificationExpiresAt;
+    private Boolean enabled;
 
 }
