@@ -20,7 +20,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Override
     public boolean isAuthentic(User user) {
       Authentication authentication =authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-              user.getUsername(),user.getPassword()
+              user.getEmail(),user.getPassword()
       ));
       return authentication.isAuthenticated();
     }

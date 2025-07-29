@@ -43,10 +43,10 @@ public class AuthController {
         }
 
         userService.saveUser(user);
-        System.out.println(user.toString());
+
 
         AuthResponseDto authResponseDto=AuthResponseDto.builder()
-                .token(jwtService.generateToken(userDetailsService.loadUserByUsername(user.getUsername())))
+                .token(jwtService.generateToken(userDetailsService.loadUserByUsername(user.getEmail())))
                 .build();
         return  new ResponseEntity<>(authResponseDto, HttpStatus.CREATED);
     }
@@ -54,9 +54,9 @@ public class AuthController {
     @PostMapping("/v1/auth/login")
     public ResponseEntity<AuthResponseDto> loginUser(@RequestBody LoginRequestDto loginRequestDto){
         User user=loginRequestDtoMapper.convertToEntity(loginRequestDto);
-        System.out.println(user.toString());
 
-        if(!userService.isExistsByUsername(user.getUsername())){
+
+        if(!userService.isExistsByEmail(user.getEmail())){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
@@ -65,7 +65,7 @@ public class AuthController {
         }
 
         AuthResponseDto authResponseDto=AuthResponseDto.builder()
-                .token(jwtService.generateToken(userDetailsService.loadUserByUsername(user.getUsername())))
+                .token(jwtService.generateToken(userDetailsService.loadUserByUsername(user.getEmail())))
                 .build();
         return  new ResponseEntity<>(authResponseDto, HttpStatus.CREATED);
     }

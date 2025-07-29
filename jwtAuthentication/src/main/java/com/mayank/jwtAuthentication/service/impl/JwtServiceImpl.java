@@ -3,15 +3,12 @@ package com.mayank.jwtAuthentication.service.impl;
 import com.mayank.jwtAuthentication.service.JwtService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
-import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -54,12 +51,12 @@ public class JwtServiceImpl implements JwtService {
     }
 
     public boolean isTokenValid(String token,UserDetails userDetails){
-        String username=extractUsername(token);
-        return username.equals(userDetails.getUsername()) && !isTokenExpired(token);
+        String email= extractEmail(token);
+        return email.equals(userDetails.getUsername()) && !isTokenExpired(token);
 
     }
 
-    public String extractUsername(String token) {
+    public String extractEmail(String token) {
         return extractClaim(token,(Claims::getSubject));
     }
 
